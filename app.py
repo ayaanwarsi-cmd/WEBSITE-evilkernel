@@ -12,191 +12,238 @@ HTML = """
 
 <style>
 :root{
-  --bg:#061108;
-  --panel:#0e1c13;
+  --bg:#020b07;
+  --glass:rgba(18, 40, 28, 0.55);
+  --border:rgba(90,255,180,0.25);
   --accent:#11e87d;
   --text:#39ff70;
-  --muted:#0b2918;
+  --muted:#9fffcf;
 }
 
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  background:var(--bg);
+  background:
+    radial-gradient(circle at top, #052012, #020b07 60%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(17,232,125,0.04),
+      rgba(17,232,125,0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
   color:var(--text);
-  font-family:Segoe UI, monospace;
-  line-height:1.6;
+  font-family: "Segoe UI", monospace;
+  overflow-x:hidden;
 }
 
+/* ====== GLASS CARD ====== */
+.glass{
+  background:var(--glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow: 0 0 40px rgba(17,232,125,0.08);
+}
+
+/* ====== HEADER ====== */
 header{
-  background:#000;
-  padding:60px 20px;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  border-bottom:2px solid var(--accent);
+  padding:40px 20px;
 }
 
-header h1{
-  font-size:42px;
+.hero{
+  max-width:900px;
+  padding:50px;
+}
+
+.hero h1{
+  font-size:48px;
   margin:0;
-  color:var(--accent);
+  color:#aaffd9;
+  letter-spacing:2px;
 }
 
-header p{
-  margin:10px 0 20px;
-  color:#7dffb0;
+.hero p{
+  margin:15px 0 30px;
+  color:var(--muted);
+  font-size:18px;
 }
 
 .btn{
   display:inline-block;
-  padding:14px 24px;
-  background:var(--accent);
-  color:#000;
-  font-weight:700;
+  padding:14px 28px;
+  background:linear-gradient(135deg, #11e87d, #5affb4);
+  color:#02140a;
+  font-weight:800;
   text-decoration:none;
-  border-radius:4px;
+  border-radius:999px;
+  box-shadow:0 0 25px rgba(17,232,125,0.5);
+  transition:all .25s ease;
 }
 
+.btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 45px rgba(17,232,125,0.9);
+}
+
+/* ====== SECTIONS ====== */
 section{
-  max-width:1000px;
-  margin:auto;
-  padding:50px 20px;
+  max-width:1100px;
+  margin:0 auto 120px;
+  padding:0 20px;
 }
 
 h2{
-  color:var(--accent);
-  border-left:4px solid var(--accent);
-  padding-left:12px;
-}
-
-.card{
-  background:var(--panel);
-  padding:20px;
-  margin:20px 0;
-  border-left:4px solid var(--accent);
+  color:#aaffd9;
+  margin-bottom:20px;
+  font-size:30px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
 }
 
-.bad{
-  color:#ff6b6b;
+.card{
+  padding:26px;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
-.good{
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 60px rgba(17,232,125,0.25);
+}
+
+.card h3{
+  margin-top:0;
   color:#7dffb0;
 }
 
-footer{
-  text-align:center;
-  padding:20px;
-  background:#000;
-  border-top:2px solid var(--accent);
+.card p{
+  color:var(--muted);
   font-size:14px;
 }
 
-.highlight{
-  background:var(--muted);
-  padding:10px;
-  border-left:3px solid var(--accent);
-  margin:15px 0;
+/* ====== LIST ====== */
+ul{
+  padding-left:18px;
+}
+
+li{
+  margin:8px 0;
+}
+
+/* ====== FOOTER ====== */
+footer{
+  padding:40px 20px;
+  text-align:center;
+  color:#6cffb0;
+  font-size:14px;
+  border-top:1px solid var(--border);
+  background:rgba(0,0,0,0.5);
+}
+
+/* ====== SCANLINE EFFECT ====== */
+.scanlines::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  pointer-events:none;
+  z-index:999;
 }
 </style>
 </head>
 
-<body>
+<body class="scanlines">
 
 <header>
-  <h1>EviLKeRneL</h1>
-  <p>SQLMap Automation • GUI Tools • Real-World Workflow</p>
-  <a class="btn" href="#free">GET FREE TOOL</a>
+  <div class="hero glass">
+    <h1>EviLKeRneL</h1>
+    <p>SQLMap Automation • GUI Tools • Workflow over Commands</p>
+    <a class="btn" href="#free">ACCESS FREE TOOL</a>
+  </div>
 </header>
 
 <section>
-<h2>❌ Why Most SQLMap Users Fail</h2>
-<ul>
-<li class="bad">Messy dorks & duplicates</li>
-<li class="bad">Manual CLI workflows</li>
-<li class="bad">Wasted scans & time</li>
-<li class="bad">No post-exploitation filtering</li>
-</ul>
+  <h2>Why Most SQLMap Users Fail</h2>
+  <div class="grid">
+    <div class="card glass"><p>❌ Dirty dorks & duplicate targets</p></div>
+    <div class="card glass"><p>❌ Manual CLI chaos</p></div>
+    <div class="card glass"><p>❌ No post-exploitation filtering</p></div>
+    <div class="card glass"><p>❌ No automation mindset</p></div>
+  </div>
 </section>
 
 <section>
-<h2>✅ The EviLKeRneL Solution</h2>
-<div class="highlight">
-Automation-first SQLMap ecosystem — prepare, exploit, filter, repeat.
-</div>
+  <h2>The EviLKeRneL Ecosystem</h2>
+  <div class="grid">
+    <div class="card glass">
+      <h3>Dork Tools Suite</h3>
+      <p>Splitter • Dedupe • Sort • Merge • Persistent DB memory</p>
+    </div>
+    <div class="card glass">
+      <h3>SQLMap Column Hunter</h3>
+      <p>Auto-detect sensitive columns with keyword intelligence</p>
+    </div>
+    <div class="card glass">
+      <h3>SQLMap Dumper (GUI)</h3>
+      <p>Single & Multi-URL dumping with clean structured output</p>
+    </div>
+    <div class="card glass">
+      <h3>Rows Filter</h3>
+      <p>Prioritize valuable dumped data automatically</p>
+    </div>
+    <div class="card glass">
+      <h3>Combo Filter</h3>
+      <p>Clean, analyze & extract usable combos fast</p>
+    </div>
+  </div>
 </section>
 
 <section>
-<h2>🧰 Tools Included</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Dork Tools Suite</h3>
-<p>Splitter • Line Remover • Dedupe • Sort • Merger • DB-based tracking</p>
-</div>
-
-<div class="card">
-<h3>SQLMap Column Hunter</h3>
-<p>Automatically finds sensitive columns using keywords</p>
-</div>
-
-<div class="card">
-<h3>SQLMap Dumper (GUI)</h3>
-<p>Single & Multi URL dumping with clean readable output</p>
-</div>
-
-<div class="card">
-<h3>Rows Filter</h3>
-<p>Sort dumped data by priority & keywords</p>
-</div>
-
-<div class="card">
-<h3>Combo Filter</h3>
-<p>Analyze & clean combo lists efficiently</p>
-</div>
-
-</div>
-</section>
-
-<section>
-<h2>🎓 SQLMap Automation Course</h2>
-<ul class="good">
-<li>Beginner → Advanced workflow</li>
-<li>Real exploitation demos</li>
-<li>GUI-based automation</li>
-<li>Bug bounty mindset</li>
-</ul>
-
-<div class="highlight">
-This course teaches **HOW TO THINK**, not just commands.
-</div>
-
-<a class="btn" href="#contact">JOIN COURSE</a>
+  <h2>SQLMap Automation Course</h2>
+  <div class="glass card">
+    <ul>
+      <li>Beginner → Advanced workflow</li>
+      <li>Automation-first mindset</li>
+      <li>Real-world exploitation logic</li>
+      <li>GUI-based professional tooling</li>
+    </ul>
+    <br>
+    <a class="btn" href="https://t.me/EviLKeRneL_Redirect">JOIN VIA TELEGRAM</a>
+  </div>
 </section>
 
 <section id="free">
-<h2>🆓 Free Tool</h2>
-<p>
-Start with the **free version** of the Dork Tools Suite and fix your workflow before SQLMap.
-</p>
-<a class="btn" href="https://t.me/EviLKeRneL">DOWNLOAD FREE TOOL</a>
-</section>
-
-<section id="contact">
-<h2>📩 Contact & Updates</h2>
-<p>Telegram: <strong>@EviLKeRneL</strong></p>
-<p>All updates & tools released there.</p>
+  <h2>Free Tool Access</h2>
+  <div class="glass card">
+    <p>
+      Start with the <strong>FREE version</strong> of the Dork Tools Suite.  
+      Fix your workflow before running SQLMap.
+    </p>
+    <br>
+    <a class="btn" href="https://t.me/EviLKeRneL_Redirect">GET FREE TOOL</a>
+  </div>
 </section>
 
 <footer>
-© 2026 EviLKeRneL — Automation over noise
+  © 2026 EviLKeRneL — Automation beats noise
 </footer>
 
 </body>
