@@ -166,6 +166,13 @@ h2{
   font-size:14px;
 }
 
+.price{
+  font-size:28px;
+  font-weight:900;
+  color:#aaffd9;
+  margin:10px 0;
+}
+
 .live-box{
   max-width:520px;
   margin:0 auto;
@@ -223,71 +230,46 @@ $ all systems ready
 </div>
 </header>
 
+<!-- 🔥 COURSE PRICING SECTION -->
 <section>
-<h2>What You Will Be Able To Do</h2>
-<div class="grid">
-  <div class="card glass">Run SQLMap confidently</div>
-  <div class="card glass">Handle proxies at scale</div>
-  <div class="card glass">Automate repetitive exploitation</div>
-  <div class="card glass">Extract only high-value data</div>
-</div>
-</section>
+<h2>Course Pricing</h2>
+<p class="subtitle">Choose the access level that fits your goals</p>
 
-<section>
-<h2>Before vs After</h2>
 <div class="grid">
+
   <div class="card glass">
-    <h3>Before</h3>
+    <h3>FREE</h3>
+    <div class="price">$0</div>
     <ul>
-      <li>Dead proxies</li>
-      <li>Messy dorks</li>
-      <li>Guesswork</li>
+      <li>Intro lessons</li>
+      <li>Basic SQLMap concepts</li>
+      <li>Community access</li>
     </ul>
+    <a class="btn" onclick="location.href='https://t.me/EviLKeRneLfreeTOOLS'">START FREE</a>
   </div>
+
   <div class="card glass">
-    <h3>After</h3>
+    <h3>PRO</h3>
+    <div class="price">$35</div>
     <ul>
-      <li>Live proxies</li>
-      <li>Clean workflow</li>
-      <li>Automation</li>
+      <li>Full SQLMap automation course</li>
+      <li>All proxy & automation tools</li>
+      <li>Lifetime updates</li>
     </ul>
+    <a class="btn" onclick="location.href='https://t.me/EviLKeRneL_Redirect'">GET PRO</a>
   </div>
-</div>
-</section>
 
-<section>
-<h2>Instant Access Guarantee</h2>
-<div class="grid">
-  <div class="card glass">Instant Telegram access</div>
-  <div class="card glass">No waiting / approvals</div>
-  <div class="card glass">Direct owner support (Elite)</div>
-</div>
-</section>
+  <div class="card glass">
+    <h3>ELITE</h3>
+    <div class="price">$65</div>
+    <ul>
+      <li>Everything in PRO</li>
+      <li>Direct owner support</li>
+      <li>Priority updates</li>
+    </ul>
+    <a class="btn" onclick="location.href='https://t.me/EviLKeRneL'">GET ELITE</a>
+  </div>
 
-<section>
-<h2>Frequently Asked Questions</h2>
-<div class="grid">
-  <div class="card glass">Beginner friendly? → YES</div>
-  <div class="card glass">Lifetime access? → YES</div>
-  <div class="card glass">Updates included? → YES</div>
-  <div class="card glass">Refunds? → Contact owner</div>
-</div>
-</section>
-
-<section>
-<h2>Why I Built This</h2>
-<p class="subtitle">
-I was tired of broken guides and random workflows.
-I built automation for myself first — then shared it with serious learners.
-</p>
-</section>
-
-<section>
-<h2>Roadmap</h2>
-<div class="grid">
-  <div class="card glass">More proxy sources</div>
-  <div class="card glass">Faster checking engine</div>
-  <div class="card glass">New automation modules</div>
 </div>
 </section>
 
@@ -330,7 +312,7 @@ setInterval(()=>{
   });
 }, speed);
 
-// CLEAN GEO ACTIVITY — NO COUNTRY CODES
+// CLEAN GEO ACTIVITY
 const geoLogs = [
   "🇮🇳 User from India joined PRO",
   "🇩🇪 User from Germany unlocked ELITE",
@@ -338,7 +320,6 @@ const geoLogs = [
   "🇨🇦 User from Canada started automation workflow",
   "🇦🇺 User from Australia joined PRO"
 ];
-
 let gi = 0;
 setInterval(()=>{
   document.getElementById("geoText").innerHTML = geoLogs[gi];
