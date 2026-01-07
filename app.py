@@ -30,6 +30,17 @@ body{
   overflow-x:hidden;
 }
 
+/* PAGE LOAD */
+body.loaded .hero{
+  opacity:1;
+  transform:translateY(0);
+}
+.hero{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .9s ease;
+}
+
 /* MATRIX */
 canvas{
   position:fixed;
@@ -58,7 +69,7 @@ header{
 .hero{
   max-width:1100px;
   width:100%;
-  padding:45px 25px;
+  padding:50px 25px;
   text-align:center;
 }
 
@@ -74,7 +85,6 @@ h1{
   font-size:clamp(14px,3.5vw,18px);
 }
 
-/* TERMINAL */
 .terminal{
   background:#000;
   padding:18px;
@@ -145,7 +155,6 @@ h2{
   font-size:14px;
 }
 
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -157,7 +166,6 @@ h2{
   font-size:14px;
 }
 
-/* LIVE ACTIVITY */
 .live-box{
   max-width:520px;
   margin:0 auto;
@@ -174,7 +182,6 @@ footer{
   font-size:13px;
 }
 
-/* MOBILE FIX */
 @media(max-width:600px){
   .terminal{font-size:12px}
   .btn{width:100%; max-width:260px}
@@ -217,21 +224,77 @@ $ all systems ready
 </header>
 
 <section>
-<h2>Live Global Activity</h2>
-<p class="subtitle">Real-time access happening worldwide</p>
-
-<div class="live-box glass" id="geoText">
-🇮🇳 User from India joined <b>PRO</b>
+<h2>What You Will Be Able To Do</h2>
+<div class="grid">
+  <div class="card glass">Run SQLMap confidently</div>
+  <div class="card glass">Handle proxies at scale</div>
+  <div class="card glass">Automate repetitive exploitation</div>
+  <div class="card glass">Extract only high-value data</div>
 </div>
 </section>
 
 <section>
-<h2>Why EviLKeRneL?</h2>
+<h2>Before vs After</h2>
 <div class="grid">
-<div class="card glass">Automated SQLMap workflows</div>
-<div class="card glass">High-speed proxy generation & checking</div>
-<div class="card glass">Clean GUI-based tools</div>
-<div class="card glass">Designed for real-world use</div>
+  <div class="card glass">
+    <h3>Before</h3>
+    <ul>
+      <li>Dead proxies</li>
+      <li>Messy dorks</li>
+      <li>Guesswork</li>
+    </ul>
+  </div>
+  <div class="card glass">
+    <h3>After</h3>
+    <ul>
+      <li>Live proxies</li>
+      <li>Clean workflow</li>
+      <li>Automation</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<section>
+<h2>Instant Access Guarantee</h2>
+<div class="grid">
+  <div class="card glass">Instant Telegram access</div>
+  <div class="card glass">No waiting / approvals</div>
+  <div class="card glass">Direct owner support (Elite)</div>
+</div>
+</section>
+
+<section>
+<h2>Frequently Asked Questions</h2>
+<div class="grid">
+  <div class="card glass">Beginner friendly? → YES</div>
+  <div class="card glass">Lifetime access? → YES</div>
+  <div class="card glass">Updates included? → YES</div>
+  <div class="card glass">Refunds? → Contact owner</div>
+</div>
+</section>
+
+<section>
+<h2>Why I Built This</h2>
+<p class="subtitle">
+I was tired of broken guides and random workflows.
+I built automation for myself first — then shared it with serious learners.
+</p>
+</section>
+
+<section>
+<h2>Roadmap</h2>
+<div class="grid">
+  <div class="card glass">More proxy sources</div>
+  <div class="card glass">Faster checking engine</div>
+  <div class="card glass">New automation modules</div>
+</div>
+</section>
+
+<section>
+<h2>Live Global Activity</h2>
+<div class="live-box glass" id="geoText">
+🇮🇳 User from India joined <b>PRO</b>
 </div>
 </section>
 
@@ -240,36 +303,47 @@ $ all systems ready
 </footer>
 
 <script>
-// MATRIX
-const c=document.getElementById("matrix");
-const x=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-const letters="01",cols=c.width/20,drops=Array(Math.floor(cols)).fill(1);
-setInterval(()=>{
- x.fillStyle="rgba(0,0,0,0.05)";
- x.fillRect(0,0,c.width,c.height);
- x.fillStyle="#11e87d";
- x.font="15px monospace";
- drops.forEach((y,i)=>{
-  x.fillText(letters[Math.random()*2|0],i*20,y*20);
-  if(y*20>c.height&&Math.random()>0.975)drops[i]=0;
-  drops[i]++;
- });
-},50);
+window.onload = () => document.body.classList.add("loaded");
 
-// CLEAN GEO ACTIVITY
-const geoLogs=[
- "🇮🇳 User from India joined PRO",
- "🇩🇪 User from Germany unlocked ELITE",
- "🇺🇸 User from United States accessed automation tools",
- "🇨🇦 User from Canada started automation workflow",
- "🇦🇺 User from Australia joined PRO"
-];
-let gi=0;
+// MATRIX (OPTIMIZED)
+const isMobile = window.innerWidth < 768;
+const c = document.getElementById("matrix");
+const x = c.getContext("2d");
+c.width = innerWidth;
+c.height = innerHeight;
+
+const letters = "01";
+const fontSize = isMobile ? 18 : 15;
+const speed = isMobile ? 90 : 50;
+const columns = Math.floor(c.width / (isMobile ? 30 : 20));
+const drops = Array(columns).fill(1);
+
 setInterval(()=>{
- document.getElementById("geoText").innerHTML=geoLogs[gi];
- gi=(gi+1)%geoLogs.length;
-},3500);
+  x.fillStyle="rgba(0,0,0,0.08)";
+  x.fillRect(0,0,c.width,c.height);
+  x.font = fontSize + "px monospace";
+  drops.forEach((y,i)=>{
+    x.fillStyle="#11e87d";
+    x.fillText(letters[Math.random()*2|0], i*(isMobile?30:20), y*fontSize);
+    if(y*fontSize > c.height && Math.random()>0.97) drops[i]=0;
+    drops[i]++;
+  });
+}, speed);
+
+// CLEAN GEO ACTIVITY — NO COUNTRY CODES
+const geoLogs = [
+  "🇮🇳 User from India joined PRO",
+  "🇩🇪 User from Germany unlocked ELITE",
+  "🇺🇸 User from United States accessed automation tools",
+  "🇨🇦 User from Canada started automation workflow",
+  "🇦🇺 User from Australia joined PRO"
+];
+
+let gi = 0;
+setInterval(()=>{
+  document.getElementById("geoText").innerHTML = geoLogs[gi];
+  gi = (gi + 1) % geoLogs.length;
+}, 3500);
 </script>
 
 </body>
