@@ -93,6 +93,8 @@ h1{font-size:clamp(38px,6vw,58px);color:#aaffd9;margin:0}
  font-weight:900;
  text-decoration:none;
  font-size:14px;
+ border:none;
+ cursor:pointer;
 }
 
 /* BADGES */
@@ -167,8 +169,53 @@ footer{
  color:#6cffb0;
 }
 
-@media(max-width:600px){
- .btn{width:100%;max-width:260px}
+/* TELEGRAM POPUP */
+#tgPopup{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.75);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:9999;
+}
+
+#tgBox{
+ max-width:360px;
+ padding:30px;
+ text-align:center;
+ position:relative;
+}
+
+#tgClose{
+ position:absolute;
+ top:12px;
+ right:15px;
+ cursor:pointer;
+ color:#ff8888;
+ font-size:18px;
+}
+
+/* MOBILE STICKY CTA */
+#mobileCTA{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:rgba(0,0,0,.85);
+ padding:10px;
+ display:none;
+ z-index:9998;
+}
+
+#mobileCTA .btn{
+ width:100%;
+ max-width:none;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+ #mobileCTA{display:block}
 }
 </style>
 </head>
@@ -201,6 +248,8 @@ $ workflow ready
 </div>
 </div>
 </header>
+
+<!-- 🔥 ALL EXISTING SECTIONS BELOW (UNCHANGED) -->
 
 <section>
 <h2>What You Will Be Able To Do</h2>
@@ -278,10 +327,51 @@ I built automation for myself first — then shared it with serious learners.
 © 2026 EviLKeRneL — Automation beats noise
 </footer>
 
+<!-- TELEGRAM POPUP -->
+<div id="tgPopup">
+ <div id="tgBox" class="glass">
+  <div id="tgClose" onclick="closeTG()">✕</div>
+  <h3>Limited Time Access</h3>
+  <p>Join Telegram before the offer ends.</p>
+  <p class="countdown">⏳ <span id="popupTimer"></span></p>
+  <button class="btn" onclick="goTG()">JOIN TELEGRAM</button>
+ </div>
+</div>
+
+<!-- MOBILE STICKY CTA -->
+<div id="mobileCTA">
+ <button class="btn" onclick="goTG()">JOIN COURSE • $35</button>
+</div>
+
 <script>
 window.onload=()=>document.body.classList.add("loaded");
 
-// MATRIX
+// COUNTDOWN (shared)
+const end=Date.now()+24*60*60*1000;
+function updateTimer(){
+ const d=end-Date.now();
+ const t=Math.floor(d/3600000)+"h "+
+         Math.floor(d%3600000/60000)+"m "+
+         Math.floor(d%60000/1000)+"s";
+ document.getElementById("timer").innerText=t;
+ document.getElementById("popupTimer").innerText=t;
+}
+setInterval(updateTimer,1000);
+updateTimer();
+
+// TELEGRAM POPUP AFTER 10s
+setTimeout(()=>{
+ document.getElementById("tgPopup").style.display="flex";
+},10000);
+
+function closeTG(){
+ document.getElementById("tgPopup").style.display="none";
+}
+function goTG(){
+ window.location.href="https://t.me/EviLKeRneL_Redirect";
+}
+
+// MATRIX (OPTIMIZED)
 const isMobile=innerWidth<768;
 const c=document.getElementById("matrix"),x=c.getContext("2d");
 c.width=innerWidth;c.height=innerHeight;
@@ -296,16 +386,6 @@ setInterval(()=>{
   drops[i]++;
  });
 },isMobile?90:50);
-
-// COUNTDOWN
-const end=Date.now()+24*60*60*1000;
-setInterval(()=>{
- const d=end-Date.now();
- document.getElementById("timer").innerText=
-  Math.floor(d/3600000)+"h "+
-  Math.floor(d%3600000/60000)+"m "+
-  Math.floor(d%60000/1000)+"s";
-},1000);
 
 // CLEAN GEO ACTIVITY
 const geoLogs=[
@@ -328,7 +408,7 @@ setInterval(()=>{
 
 @app.route("/")
 def index():
-    return Response(HTML, mimetype="text/html")
+ return Response(HTML, mimetype="text/html")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__=="__main__":
+ app.run(host="0.0.0.0",port=5000)
