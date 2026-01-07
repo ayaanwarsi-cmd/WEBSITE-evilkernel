@@ -7,7 +7,7 @@ HTML = """
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>EviLKeRneL | Automation Toolkit</title>
+<title>EviLKeRneL | Professional Automation Toolkit</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -53,37 +53,42 @@ header{
 }
 
 .hero{
-  max-width:1050px;
-  padding:60px;
+  max-width:1100px;
+  padding:65px;
   text-align:center;
 }
 
 h1{
-  font-size:56px;
+  font-size:58px;
   color:#aaffd9;
   margin:0;
   letter-spacing:3px;
 }
 
+.tagline{
+  margin-top:10px;
+  color:#7dffb0;
+  font-size:18px;
+}
+
 .terminal{
   background:#000;
-  padding:18px;
+  padding:20px;
   border-radius:12px;
   text-align:left;
-  margin:30px auto 15px;
-  max-width:750px;
-  box-shadow:0 0 30px rgba(0,255,140,.35);
+  margin:35px auto 15px;
+  max-width:780px;
+  box-shadow:0 0 35px rgba(0,255,140,.4);
 }
 
 .btn{
   display:inline-block;
-  padding:15px 34px;
-  margin:10px;
+  padding:15px 36px;
+  margin:12px;
   border-radius:999px;
   background:linear-gradient(135deg,#11e87d,#5affb4);
   color:#02140a;
   font-weight:900;
-  border:none;
   cursor:pointer;
   text-decoration:none;
   letter-spacing:1px;
@@ -91,42 +96,48 @@ h1{
 }
 
 section{
-  max-width:1250px;
-  margin:0 auto 130px;
-  padding:0 22px;
+  max-width:1300px;
+  margin:0 auto 140px;
+  padding:0 24px;
 }
 
 h2{
   color:#aaffd9;
-  font-size:34px;
-  margin-bottom:15px;
+  font-size:36px;
+  margin-bottom:16px;
 }
 
 .subtitle{
   color:#7dffb0;
-  max-width:850px;
-  margin-bottom:30px;
+  max-width:900px;
+  margin-bottom:32px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-  gap:28px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
 }
 
 .card{
-  padding:30px;
+  padding:32px;
 }
 
 .counter{
-  margin:10px 0 25px;
-  color:#7dffb0;
+  margin-top:10px;
   font-size:14px;
+  color:#7dffb0;
+}
+
+.activity{
+  margin-top:15px;
+  font-size:13px;
+  color:#9fffcf;
 }
 
 footer{
   text-align:center;
-  padding:45px;
+  padding:50px;
   border-top:1px solid var(--border);
   color:#6cffb0;
 }
@@ -141,26 +152,21 @@ footer{
 <div class="hero glass">
 
 <h1>EviLKeRneL</h1>
+<div class="tagline">Automation over noise • Tools built for real operators</div>
 
 <div class="terminal">
 <pre id="typing"></pre>
 </div>
 
 <div class="counter">
-👁️ <span id="live">134</span> operators online
+👁️ <span id="live">138</span> operators online
 </div>
 
-<a class="btn" onclick="location.href='https://t.me/EviLKeRneLfreeTOOLS'">
-FREE TOOLS
-</a>
+<div class="activity" id="activity"></div>
 
-<a class="btn" onclick="location.href='https://t.me/EviLKeRneL_Redirect'">
-JOIN COURSE
-</a>
-
-<a class="btn" onclick="location.href='https://t.me/EviLKeRneL'">
-CONTACT OWNER
-</a>
+<a class="btn" onclick="location.href='https://t.me/EviLKeRneLfreeTOOLS'">FREE TOOLS</a>
+<a class="btn" onclick="location.href='https://t.me/EviLKeRneL_Redirect'">JOIN COURSE</a>
+<a class="btn" onclick="location.href='https://t.me/EviLKeRneL'">CONTACT OWNER</a>
 
 </div>
 </header>
@@ -168,66 +174,63 @@ CONTACT OWNER
 <section>
 <h2>Proxy Automation Toolkit</h2>
 <p class="subtitle">
-Proxy scraping, checking, and classification — fully automated.  
-No more dead lists. No more manual testing.
+Proxy scraping problem ends here. Generate, check, filter and classify proxies
+at massive scale without manual testing.
 </p>
 
 <div class="grid">
-
 <div class="card glass">
 <h3>Proxy Scraper & Generator</h3>
 <p>
-Proxy scraping problem ends here.  
-Automatically harvest massive proxy lists from dozens of public sources
-with deduplication built-in.
+Collect millions of HTTP, SOCKS4 and SOCKS5 proxies from public sources.
+Automatic deduplication and formatting included.
 </p>
 </div>
 
 <div class="card glass">
-<h3>High-Speed Proxy Checker</h3>
+<h3>High Speed Proxy Checker</h3>
 <p>
-Test HTTP, SOCKS4, and SOCKS5 proxies at extreme speed using concurrency.
-Dead proxies are removed instantly.
+Concurrent proxy checking engine removes dead proxies instantly
+and keeps only working endpoints.
 </p>
 </div>
 
 <div class="card glass">
-<h3>Proxy Classification Engine</h3>
+<h3>Proxy Classification</h3>
 <p>
-Automatically classify proxies as <b>Elite</b>, <b>Anonymous</b>, or
-<b>Transparent</b> using real IP leakage detection.
+Detect IP leakage and classify proxies as Elite, Anonymous or Transparent
+using real request analysis.
 </p>
 </div>
-
 </div>
 </section>
 
 <section>
 <h2>SQLMap Automation Ecosystem</h2>
 <p class="subtitle">
-Designed to eliminate manual SQLMap pain and convert chaos into structure.
+Built to remove chaos from SQLMap usage and replace it with a structured,
+repeatable exploitation workflow.
 </p>
 
 <div class="grid">
-
 <div class="card glass">
 <h3>Dork Intelligence Suite</h3>
 <p>
-Split, dedupe, sort, merge, and permanently track scanned targets.
-Your SQLMap success starts here.
+Split huge dork files, remove duplicates, sort targets and track already
+scanned URLs permanently.
 </p>
 </div>
 
 <div class="card glass">
 <h3>SQLMap Column Hunter</h3>
 <p>
-Automatically locate sensitive columns using keyword intelligence.
-No more guessing table structures.
+Automatically identify sensitive database columns using keyword intelligence
+without manual inspection.
 </p>
 </div>
 
 <div class="card glass">
-<h3>SQLMap Dumper (GUI)</h3>
+<h3>SQLMap Dumper GUI</h3>
 <p>
 Dump databases from single or multiple targets with clean,
 human-readable output designed for speed.
@@ -237,53 +240,61 @@ human-readable output designed for speed.
 <div class="card glass">
 <h3>Rows & Combo Filters</h3>
 <p>
-Extract only valuable rows, credentials, and patterns from massive dumps.
-Post-exploitation done right.
+Extract only high-value data from massive dumps and combo lists.
+Post-exploitation done properly.
 </p>
 </div>
-
 </div>
 </section>
 
 <section>
-<h2>Why EviLKeRneL?</h2>
-<p class="subtitle">
-This is not a copy-paste command collection.
-This is a professional automation mindset.
-</p>
+<h2>Pricing Plans</h2>
+<p class="subtitle">Start free. Upgrade when you are ready.</p>
 
 <div class="grid">
-
 <div class="card glass">
-<p>✔ Built for real-world workflows</p>
+<h3>FREE</h3>
+<p>$0</p>
+<ul>
+<li>Limited tools</li>
+<li>Basic workflow access</li>
+<li>Community support</li>
+</ul>
 </div>
 
 <div class="card glass">
-<p>✔ GUI-driven speed & clarity</p>
+<h3>PRO</h3>
+<p>$35</p>
+<ul>
+<li>All tools unlocked</li>
+<li>Automation workflows</li>
+<li>Full course access</li>
+</ul>
 </div>
 
 <div class="card glass">
-<p>✔ Automation over brute force</p>
+<h3>ELITE</h3>
+<p>$65</p>
+<ul>
+<li>Everything in PRO</li>
+<li>Priority updates</li>
+<li>Direct owner support</li>
+</ul>
 </div>
-
-<div class="card glass">
-<p>✔ Designed by practitioners</p>
-</div>
-
 </div>
 </section>
 
 <footer>
-© 2026 EviLKeRneL — Automation beats noise
+© 2026 EviLKeRneL — Built for professionals, not script-kiddies
 </footer>
 
 <script>
 // TERMINAL TYPING
 const lines=[
-"$ loading proxy intelligence...",
-"$ initializing sqlmap automation...",
-"$ removing manual bottlenecks...",
-"$ workflow ready",
+"$ initializing proxy engine...",
+"$ loading sqlmap automation modules...",
+"$ preparing workflow...",
+"$ all systems ready",
 "$ welcome to EviLKeRneL"
 ];
 let i=0,j=0;
@@ -320,14 +331,27 @@ setInterval(()=>{
  });
 },50);
 
-// FAKE LIVE USERS
+// LIVE USERS
 let live=120+Math.floor(Math.random()*40);
 setInterval(()=>{
  live+=Math.floor(Math.random()*5-2);
- if(live<80)live=80;
- if(live>260)live=260;
+ if(live<90)live=90;
+ if(live>300)live=300;
  document.getElementById("live").innerText=live;
 },3000);
+
+// FAKE PURCHASE FEED
+const purchases=[
+"User purchased PRO ($35)",
+"User upgraded to ELITE ($65)",
+"New PRO access activated",
+"ELITE plan unlocked",
+"PRO plan purchased"
+];
+setInterval(()=>{
+ document.getElementById("activity").innerText =
+ "[LIVE] " + purchases[Math.floor(Math.random()*purchases.length)];
+},3500);
 </script>
 
 </body>
