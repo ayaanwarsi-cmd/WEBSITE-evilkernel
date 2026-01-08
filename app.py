@@ -30,14 +30,11 @@ body{
  overflow-x:hidden;
 }
 
-/* PAGE LOAD */
 body.loaded .hero{opacity:1;transform:translateY(0)}
 .hero{opacity:0;transform:translateY(30px);transition:.9s}
 
-/* MATRIX */
 canvas{position:fixed;inset:0;z-index:-1}
 
-/* GLASS */
 .glass{
  background:var(--glass);
  backdrop-filter:blur(18px);
@@ -46,7 +43,6 @@ canvas{position:fixed;inset:0;z-index:-1}
  box-shadow:0 0 40px rgba(17,232,125,.18);
 }
 
-/* HEADER */
 header{
  min-height:100vh;
  display:flex;
@@ -57,7 +53,6 @@ header{
 
 .hero{
  max-width:1100px;
- width:100%;
  padding:50px 25px;
  text-align:center;
 }
@@ -65,18 +60,16 @@ header{
 h1{font-size:clamp(38px,6vw,58px);color:#aaffd9;margin:0}
 .tagline{color:#7dffb0;margin-top:8px}
 
-/* TERMINAL */
 .terminal{
  background:#000;
  padding:18px;
  border-radius:12px;
- text-align:left;
  margin:25px auto;
  max-width:800px;
  font-size:13px;
+ text-align:left;
 }
 
-/* CTA */
 .cta-row{
  display:flex;
  flex-wrap:wrap;
@@ -97,13 +90,12 @@ h1{font-size:clamp(38px,6vw,58px);color:#aaffd9;margin:0}
  cursor:pointer;
 }
 
-/* BADGES */
 .badges{
  display:flex;
- flex-wrap:wrap;
  justify-content:center;
  gap:10px;
  margin-top:16px;
+ flex-wrap:wrap;
 }
 
 .badge{
@@ -114,7 +106,6 @@ h1{font-size:clamp(38px,6vw,58px);color:#aaffd9;margin:0}
  color:#9fffcf;
 }
 
-/* SECTIONS */
 section{
  max-width:1250px;
  margin:0 auto 100px;
@@ -130,11 +121,10 @@ h2{text-align:center;color:#aaffd9}
  gap:22px;
 }
 
-.card{padding:26px;font-size:14px;position:relative}
+.card{padding:26px;font-size:14px}
 
 .price{font-size:30px;font-weight:900;color:#aaffd9}
 
-/* POPULAR */
 .popular{border:2px solid #5affb4}
 .popular::before{
  content:"MOST POPULAR";
@@ -150,10 +140,8 @@ h2{text-align:center;color:#aaffd9}
  font-weight:900;
 }
 
-/* COUNTDOWN */
 .countdown{text-align:center;color:#ffdf7e;margin-bottom:30px}
 
-/* LIVE */
 .live-box{
  max-width:520px;
  margin:0 auto;
@@ -161,7 +149,6 @@ h2{text-align:center;color:#aaffd9}
  font-size:14px;
 }
 
-/* FOOTER */
 footer{
  text-align:center;
  padding:40px;
@@ -169,51 +156,23 @@ footer{
  color:#6cffb0;
 }
 
-/* TELEGRAM POPUP */
+/* POPUP + MOBILE CTA */
 #tgPopup{
- position:fixed;
- inset:0;
+ position:fixed; inset:0;
  background:rgba(0,0,0,.75);
- display:none;
- align-items:center;
- justify-content:center;
+ display:none; align-items:center; justify-content:center;
  z-index:9999;
 }
+#tgBox{max-width:360px;padding:30px;position:relative}
+#tgClose{position:absolute;top:12px;right:15px;cursor:pointer;color:#ff8888}
 
-#tgBox{
- max-width:360px;
- padding:30px;
- text-align:center;
- position:relative;
-}
-
-#tgClose{
- position:absolute;
- top:12px;
- right:15px;
- cursor:pointer;
- color:#ff8888;
- font-size:18px;
-}
-
-/* MOBILE STICKY CTA */
 #mobileCTA{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
+ position:fixed; bottom:0; left:0; right:0;
  background:rgba(0,0,0,.85);
- padding:10px;
- display:none;
- z-index:9998;
+ padding:10px; display:none; z-index:9998;
 }
+#mobileCTA .btn{width:100%}
 
-#mobileCTA .btn{
- width:100%;
- max-width:none;
-}
-
-/* RESPONSIVE */
 @media(max-width:768px){
  #mobileCTA{display:block}
 }
@@ -248,8 +207,6 @@ $ workflow ready
 </div>
 </div>
 </header>
-
-<!-- 🔥 ALL EXISTING SECTIONS BELOW (UNCHANGED) -->
 
 <section>
 <h2>What You Will Be Able To Do</h2>
@@ -307,87 +264,45 @@ I built automation for myself first — then shared it with serious learners.
 
 <section>
 <h2>Course Pricing</h2>
-<div class="countdown">⏳ Offer ends in <span id="timer"></span></div>
-
 <div class="grid">
- <div class="card glass"><h3>FREE</h3><div class="price">$0</div><p>Intro access</p></div>
- <div class="card glass popular"><h3>PRO</h3><div class="price">$35</div><p>Full course + tools</p></div>
- <div class="card glass"><h3>ELITE</h3><div class="price">$65</div><p>Everything + support</p></div>
+ <div class="card glass"><h3>FREE</h3><div class="price">$0</div></div>
+ <div class="card glass popular"><h3>PRO</h3><div class="price">$35</div></div>
+ <div class="card glass"><h3>ELITE</h3><div class="price">$65</div></div>
 </div>
 </section>
 
 <section>
 <h2>Live Global Activity</h2>
-<div class="live-box glass" id="geoText">
-🇮🇳 User from India joined PRO
-</div>
+<div class="live-box glass" id="geoText">🇮🇳 User from India joined PRO</div>
 </section>
 
-<footer>
-© 2026 EviLKeRneL — Automation beats noise
-</footer>
-
-<!-- TELEGRAM POPUP -->
-<div id="tgPopup">
- <div id="tgBox" class="glass">
-  <div id="tgClose" onclick="closeTG()">✕</div>
-  <h3>Limited Time Access</h3>
-  <p>Join Telegram before the offer ends.</p>
-  <p class="countdown">⏳ <span id="popupTimer"></span></p>
-  <button class="btn" onclick="goTG()">JOIN TELEGRAM</button>
- </div>
-</div>
-
-<!-- MOBILE STICKY CTA -->
-<div id="mobileCTA">
- <button class="btn" onclick="goTG()">JOIN COURSE • $35</button>
-</div>
+<footer>© 2026 EviLKeRneL — Automation beats noise</footer>
 
 <script>
 window.onload=()=>document.body.classList.add("loaded");
 
-// COUNTDOWN (shared)
-const end=Date.now()+24*60*60*1000;
-function updateTimer(){
- const d=end-Date.now();
- const t=Math.floor(d/3600000)+"h "+
-         Math.floor(d%3600000/60000)+"m "+
-         Math.floor(d%60000/1000)+"s";
- document.getElementById("timer").innerText=t;
- document.getElementById("popupTimer").innerText=t;
-}
-setInterval(updateTimer,1000);
-updateTimer();
+/* ORIGINAL GREEN MATRIX */
+const c=document.getElementById("matrix");
+const x=c.getContext("2d");
+c.width=innerWidth; c.height=innerHeight;
+const letters="01";
+const fontSize=16;
+const columns=Math.floor(c.width/fontSize);
+const drops=Array(columns).fill(1);
 
-// TELEGRAM POPUP AFTER 10s
-setTimeout(()=>{
- document.getElementById("tgPopup").style.display="flex";
-},10000);
-
-function closeTG(){
- document.getElementById("tgPopup").style.display="none";
-}
-function goTG(){
- window.location.href="https://t.me/EviLKeRneL_Redirect";
-}
-
-// MATRIX (OPTIMIZED)
-const isMobile=innerWidth<768;
-const c=document.getElementById("matrix"),x=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-const drops=Array(Math.floor(c.width/(isMobile?30:20))).fill(1);
 setInterval(()=>{
- x.fillStyle="rgba(0,0,0,.08)";
+ x.fillStyle="rgba(0,0,0,0.05)";
  x.fillRect(0,0,c.width,c.height);
- x.font=(isMobile?18:15)+"px monospace";
+ x.fillStyle="#11e87d";
+ x.font=fontSize+"px monospace";
  drops.forEach((y,i)=>{
-  x.fillText(Math.random()>0.5?"0":"1",i*(isMobile?30:20),y*(isMobile?18:15));
-  if(y*20>c.height&&Math.random()>0.97)drops[i]=0;
+  x.fillText(letters[Math.random()*2|0],i*fontSize,y*fontSize);
+  if(y*fontSize>c.height&&Math.random()>0.975)drops[i]=0;
   drops[i]++;
  });
-},isMobile?90:50);
+},50);
 
-// CLEAN GEO ACTIVITY
+/* GEO ACTIVITY */
 const geoLogs=[
  "🇮🇳 User from India joined PRO",
  "🇩🇪 User from Germany unlocked ELITE",
@@ -396,10 +311,7 @@ const geoLogs=[
  "🇦🇺 User from Australia joined PRO"
 ];
 let gi=0;
-setInterval(()=>{
- document.getElementById("geoText").innerHTML=geoLogs[gi];
- gi=(gi+1)%geoLogs.length;
-},3500);
+setInterval(()=>{geoText.innerHTML=geoLogs[gi];gi=(gi+1)%geoLogs.length},3500);
 </script>
 
 </body>
