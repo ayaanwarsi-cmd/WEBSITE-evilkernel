@@ -1,0 +1,20 @@
+name: Keep Render App Alive (15s simulation)
+
+on:
+  schedule:
+    - cron: "* * * * *"
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render App every 15 seconds
+        run: |
+          URL="https://website-evilkernel.onrender.com"
+
+          for i in {1..4}; do
+            echo "Ping $i"
+            curl -s $URL > /dev/null
+            sleep 15
+          done
