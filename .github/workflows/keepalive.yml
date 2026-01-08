@@ -1,4 +1,4 @@
-name: Keep Render App Alive (15s simulation)
+name: Keep Render App Alive + Alert
 
 on:
   schedule:
@@ -8,13 +8,38 @@ on:
 jobs:
   keepalive:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Check Render App
+        env:
+          URL: https://website-evilkernel.onrender.com
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 $URL || echo "000")
+
+          echo "HTTP STATUS: $STATUS"
+
+          if [ "$STATUS" != "200" ]; then
+            echo "DOWN" > status.txt
+          else
+            echo "UP" > status.txt
+          fi
+
       - name: Ping Render App every 15 seconds
         run: |
-          URL="https://website-evilkernel.onrender.com"
-
+          URL="https://YOUR-RENDER-APP.onrender.com"
           for i in {1..4}; do
-            echo "Ping $i"
             curl -s $URL > /dev/null
             sleep 15
           done
+
+      - name: Send Telegram alert if DOWN
+        if: always()
+        env:
+          BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          if grep -q "DOWN" status.txt; then
+            curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+              -d chat_id=$CHAT_ID \
+              -d text="🚨 ALERT: Render app is DOWN or not responding!"
+          fi
