@@ -2,7 +2,7 @@ name: Keep Render App Alive + Alert
 
 on:
   schedule:
-    - cron: "* * * * *"   # runs every 1 minute
+    - cron: "* * * * *"   # every 1 minute
   workflow_dispatch:
 
 jobs:
@@ -10,31 +10,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Check health endpoint
+      # 1️⃣ Restore last status from cache
+      - name: Restore last status
+        uses: actions/cache@v4
+        with:
+          path: last_status.txt
+          key: render-status
+
+      # 2️⃣ Check Render health
       - name: Check Render Health
         id: check
         run: |
-          URL="https://website-evilkernel.onrender.com/health"
+          URL="https://website-evilkernel.onrender.com/invalid"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 $URL || echo "000")
           echo "status=$STATUS" >> $GITHUB_OUTPUT
           echo "HTTP STATUS: $STATUS"
 
-      # 2️⃣ Load previous status (if exists)
-      - name: Load previous status
+      # 3️⃣ Read previous status
+      - name: Read previous status
         id: prev
         run: |
           if [ -f last_status.txt ]; then
-            echo "prev=$(cat last_status.txt)" >> $GITHUB_OUTPUT
+            PREV=$(cat last_status.txt)
           else
-            echo "prev=UNKNOWN" >> $GITHUB_OUTPUT
+            PREV="UNKNOWN"
           fi
+          echo "prev=$PREV" >> $GITHUB_OUTPUT
+          echo "Previous status: $PREV"
 
-      # 3️⃣ Save current status
+      # 4️⃣ Save current status
       - name: Save current status
         run: |
           echo "${{ steps.check.outputs.status }}" > last_status.txt
 
-      # 4️⃣ Send DOWN alert
+      # 5️⃣ Send DOWN alert
       - name: Send DOWN alert
         if: steps.check.outputs.status != '200'
         env:
@@ -45,7 +54,7 @@ jobs:
             -d chat_id=$CHAT_ID \
             -d text="🚨 ALERT: Render app is DOWN (status ${{ steps.check.outputs.status }})"
 
-      # 5️⃣ Send RECOVERY alert (back online)
+      # 6️⃣ Send RECOVERY alert
       - name: Send RECOVERY alert
         if: steps.prev.outputs.prev != '200' && steps.check.outputs.status == '200'
         env:
@@ -56,10 +65,10 @@ jobs:
             -d chat_id=$CHAT_ID \
             -d text="✅ RECOVERY: Render app is back ONLINE"
 
-      # 6️⃣ Keep Render awake (15s simulated pings)
+      # 7️⃣ Keep Render awake (15s pings)
       - name: Keep Render Awake
         run: |
-          URL="https://website-evilkernel.onrender.com/health"
+          URL="https://website-evilkernel.onrender.com/invalid"
           for i in {1..4}; do
             curl -s $URL > /dev/null
             sleep 15
