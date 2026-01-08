@@ -21,7 +21,7 @@ jobs:
       - name: Check Render Health
         id: check
         run: |
-          URL="https://website-evilkernel.onrender.com/invalid"
+          URL="https://this-domain-will-never-exist-9999.huihui/"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 $URL || echo "000")
           echo "status=$STATUS" >> $GITHUB_OUTPUT
           echo "HTTP STATUS: $STATUS"
@@ -68,7 +68,7 @@ jobs:
       # 7️⃣ Keep Render awake (15s pings)
       - name: Keep Render Awake
         run: |
-          URL="https://website-evilkernel.onrender.com/invalid"
+          URL="https://this-domain-will-never-exist-9999.huihui/"
           for i in {1..4}; do
             curl -s $URL > /dev/null
             sleep 15
