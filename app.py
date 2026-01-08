@@ -276,15 +276,6 @@ I built automation for myself first — then shared it with serious learners.
 <div class="live-box glass" id="geoText">🇮🇳 User from India joined PRO</div>
 </section>
 
-<section>
-  <h2>Latest Updates</h2>
-  <p class="subtitle">Published directly from admin panel</p>
-
-  <div class="grid" id="postsGrid">
-    <div class="card glass">Loading posts...</div>
-  </div>
-</section>
-
 <footer>© 2026 EviLKeRneL — Automation beats noise</footer>
 
 <script>
@@ -323,51 +314,6 @@ let gi=0;
 setInterval(()=>{geoText.innerHTML=geoLogs[gi];gi=(gi+1)%geoLogs.length},3500);
 </script>
 
-<script>
-/* ===============================
-   FETCH POSTS FROM ADMIN PANEL
-================================ */
-
-const POSTS_API = "https://admin-panel-j6tf.onrender.com/api/posts";
-
-async function loadPosts() {
-  try {
-    const res = await fetch(POSTS_API);
-    const posts = await res.json();
-
-    const grid = document.getElementById("postsGrid");
-    grid.innerHTML = "";
-
-    if (!posts.length) {
-      grid.innerHTML = "<div class='card glass'>No posts yet.</div>";
-      return;
-    }
-
-    posts.forEach(p => {
-      const imgHTML = p.image
-        ? `<img src="https://admin-panel-j6tf.onrender.com/uploads/${p.image}"
-                style="width:100%;border-radius:12px;margin-bottom:12px;">`
-        : "";
-
-      grid.innerHTML += `
-        <div class="card glass">
-          ${imgHTML}
-          <h3 style="color:#aaffd9">${p.title}</h3>
-          <p style="color:#9fffcf">${p.content}</p>
-        </div>
-      `;
-    });
-
-  } catch (e) {
-    document.getElementById("postsGrid").innerHTML =
-      "<div class='card glass'>Failed to load posts.</div>";
-  }
-}
-
-/* LOAD POSTS ON PAGE LOAD */
-loadPosts();
-</script>
-
 </body>
 </html>
 """
@@ -382,5 +328,6 @@ def health():
 
 if __name__=="__main__":
  app.run(host="0.0.0.0",port=5000)
+
 
 
