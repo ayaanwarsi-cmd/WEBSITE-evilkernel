@@ -2,7 +2,7 @@ name: Keep Render App Alive + Alert
 
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "* * * * *"   # runs every 1 minute
   workflow_dispatch:
 
 jobs:
@@ -10,36 +10,57 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Render App
-        env:
-          URL: https://YOUR-RENDER-APP.onrender.com
+      # 1️⃣ Check health endpoint
+      - name: Check Render Health
+        id: check
         run: |
+          URL="https://website-evilkernel.onrender.com/health"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 $URL || echo "000")
-
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
           echo "HTTP STATUS: $STATUS"
 
-          if [ "$STATUS" != "200" ]; then
-            echo "DOWN" > status.txt
+      # 2️⃣ Load previous status (if exists)
+      - name: Load previous status
+        id: prev
+        run: |
+          if [ -f last_status.txt ]; then
+            echo "prev=$(cat last_status.txt)" >> $GITHUB_OUTPUT
           else
-            echo "UP" > status.txt
+            echo "prev=UNKNOWN" >> $GITHUB_OUTPUT
           fi
 
-      - name: Ping Render App every 15 seconds
+      # 3️⃣ Save current status
+      - name: Save current status
         run: |
-          URL="https://YOUR-RENDER-APP.onrender.com"
-          for i in {1..4}; do
-            curl -s $URL > /dev/null
-            sleep 15
-          done
+          echo "${{ steps.check.outputs.status }}" > last_status.txt
 
-      - name: Send Telegram alert if DOWN
-        if: always()
+      # 4️⃣ Send DOWN alert
+      - name: Send DOWN alert
+        if: steps.check.outputs.status != '200'
         env:
           BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: |
-          if grep -q "DOWN" status.txt; then
-            curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
-              -d chat_id=$CHAT_ID \
-              -d text="🚨 ALERT: Render app is DOWN or not responding!"
-          fi
+          curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+            -d chat_id=$CHAT_ID \
+            -d text="🚨 ALERT: Render app is DOWN (status ${{ steps.check.outputs.status }})"
+
+      # 5️⃣ Send RECOVERY alert (back online)
+      - name: Send RECOVERY alert
+        if: steps.prev.outputs.prev != '200' && steps.check.outputs.status == '200'
+        env:
+          BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |
+          curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage \
+            -d chat_id=$CHAT_ID \
+            -d text="✅ RECOVERY: Render app is back ONLINE"
+
+      # 6️⃣ Keep Render awake (15s simulated pings)
+      - name: Keep Render Awake
+        run: |
+          URL="https://website-evilkernel.onrender.com/health"
+          for i in {1..4}; do
+            curl -s $URL > /dev/null
+            sleep 15
+          done
