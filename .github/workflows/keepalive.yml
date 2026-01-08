@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check Render App
         env:
-          URL: https://website-evilkernel.onrender.com
+          URL: https://YOUR-RENDER-APP.onrender.com
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 $URL || echo "000")
 
